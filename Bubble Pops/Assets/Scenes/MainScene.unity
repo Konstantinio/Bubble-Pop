@@ -294,8 +294,8 @@ MonoBehaviour:
     type: 3}
   parent: {fileID: 1474084250}
   startPosition: {x: -2.03, y: 3.32}
-  xGap: 0.75
-  yGap: 0.65
+  xGap: 0.7
+  yGap: 0.57
 --- !u!1 &1474084250
 GameObject:
   m_ObjectHideFlags: 0
