@@ -48,7 +48,7 @@ public class Bubble : MonoBehaviour
     private Bubble ShootRay(Vector2 startPosition, Vector2 endPosition)
     {
         var hit = Physics2D.Raycast(startPosition, endPosition, Mathf.Infinity);
-        if (hit.collider != null)
+        if (hit.collider != null && hit.collider.gameObject.GetComponent<Bubble>()!=null)
         {
             var bubble = hit.collider.gameObject.GetComponent<Bubble>();
             Debug.DrawLine(startPosition, hit.point, (bubble.indexer == 1 && this.indexer==1) ? Color.red : Color.blue);
