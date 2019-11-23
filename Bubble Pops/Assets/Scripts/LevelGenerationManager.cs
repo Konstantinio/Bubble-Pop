@@ -24,7 +24,7 @@ public class LevelGenerationManager : MonoBehaviour
         {
             for (int x = 0; x < lineLength; x++)
             {
-                Instantiate(ballPrefab, startPosition+new Vector2(x*xGap + y%2*xGap/2,-y*yGap), Quaternion.identity, parent.transform);
+                Instantiate(ballPrefab, startPosition+new Vector2(x*xGap + y%2*xGap/2.2f,-y*yGap), Quaternion.identity, parent.transform);
             }
         }
     }

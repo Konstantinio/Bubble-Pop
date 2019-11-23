@@ -8,6 +8,8 @@ public class Bubble : MonoBehaviour
 {
     public Bubble[] nearBubbles = new Bubble[6];
     public int indexer;
+    public float maxDistance;
+    public bool isShowingRedLines;
     private void Start()
     {
         InitializeBubble();
@@ -47,17 +49,21 @@ public class Bubble : MonoBehaviour
     [CanBeNull]
     private Bubble ShootRay(Vector2 startPosition, Vector2 endPosition)
     {
-        var hit = Physics2D.Raycast(startPosition, endPosition, Mathf.Infinity);
+        var hit = Physics2D.Raycast(startPosition, endPosition, maxDistance);
         if (hit.collider != null && hit.collider.gameObject.GetComponent<Bubble>()!=null)
         {
             var bubble = hit.collider.gameObject.GetComponent<Bubble>();
-            Debug.DrawLine(startPosition, hit.point, (bubble.indexer == 1 && this.indexer==1) ? Color.red : Color.blue);
+            Debug.DrawLine(startPosition, hit.point, (bubble.indexer == 1 && this.indexer==1) ? Color.yellow : Color.blue);
             return bubble;
             
         }
         else
         {
-            //Debug.DrawRay(startPosition, endPosition * 1000, Color.red);
+            if (isShowingRedLines)
+            {
+                Debug.DrawRay(startPosition, endPosition * 1000, Color.red);
+            }
+            
             return null;
             
         }

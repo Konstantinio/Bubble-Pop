@@ -101,6 +101,7 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   indexer: 0
+  maxDistance: 0.5
 --- !u!58 &6644952620262870012
 CircleCollider2D:
   m_ObjectHideFlags: 0
