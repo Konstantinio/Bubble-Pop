@@ -13,13 +13,21 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Assets/Scripts/Bubble.cs">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="270">
-              <caret line="18" lean-forward="true" selection-start-line="18" selection-end-line="18" />
+            <state relative-caret-position="735">
+              <caret line="49" column="64" selection-start-line="49" selection-start-column="64" selection-end-line="49" selection-end-column="64" />
               <folding>
-                <marker date="1574497617382" expanded="true" signature="6:92" ph="..." />
-                <marker date="1574497617382" expanded="true" signature="129:275" ph="{...}" />
-                <marker date="1574497617382" expanded="true" signature="194:215" ph="{...}" />
-                <marker date="1574497617382" expanded="true" signature="252:273" ph="{...}" />
+                <marker date="1574509452366" expanded="true" signature="6:121" ph="..." />
+                <marker date="1574509452366" expanded="true" signature="158:1792" ph="{...}" />
+                <marker date="1574509452366" expanded="true" signature="258:298" ph="{...}" />
+                <marker date="1574509452366" expanded="true" signature="325:365" ph="{...}" />
+                <marker date="1574509452366" expanded="true" signature="402:1165" ph="{...}" />
+                <marker date="1574509452366" expanded="true" signature="839:1159" ph="{...}" />
+                <marker date="1574509452366" expanded="true" signature="887:1150" ph="{...}" />
+                <marker date="1574509452366" expanded="true" signature="927:1022" ph="{...}" />
+                <marker date="1574509452366" expanded="true" signature="1042:1137" ph="{...}" />
+                <marker date="1574509452366" expanded="true" signature="1254:1790" ph="{...}" />
+                <marker date="1574509452366" expanded="true" signature="1375:1629" ph="{...}" />
+                <marker date="1574509452366" expanded="true" signature="1642:1775" ph="{...}" />
               </folding>
             </state>
           </provider>
@@ -28,13 +36,14 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Assets/Scripts/GridSystem.cs">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="210">
-              <caret line="14" column="8" lean-forward="true" selection-start-line="14" selection-start-column="8" selection-end-line="14" selection-end-column="8" />
+            <state relative-caret-position="225">
+              <caret line="15" column="8" lean-forward="true" selection-start-line="15" selection-start-column="8" selection-end-line="15" selection-end-column="8" />
               <folding>
-                <marker date="1574495737466" expanded="true" signature="6:92" ph="..." />
-                <marker date="1574495737466" expanded="true" signature="133:268" ph="{...}" />
-                <marker date="1574495737466" expanded="true" signature="160:204" ph="{...}" />
-                <marker date="1574495737466" expanded="true" signature="245:266" ph="{...}" />
+                <marker date="1574497727966" expanded="true" signature="6:92" ph="..." />
+                <marker date="1574497727966" expanded="true" signature="133:393" ph="{...}" />
+                <marker date="1574497727966" expanded="true" signature="201:245" ph="{...}" />
+                <marker date="1574497727966" expanded="true" signature="286:307" ph="{...}" />
+                <marker date="1574497727966" expanded="true" signature="355:391" ph="{...}" />
               </folding>
             </state>
           </provider>
@@ -42,11 +51,21 @@
       </file>
     </leaf>
   </component>
+  <component name="FindInProjectRecents">
+    <findStrings>
+      <find>p</find>
+    </findStrings>
+    <replaceStrings>
+      <replace>startPosition</replace>
+    </replaceStrings>
+  </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
   </component>
   <component name="HighlightingSettingsPerFile">
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/C0EF81E1-639B-423A-B35C-E0E4C08B5B7A/e3/06af36df/Mathf.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/GridSystem.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/0FB38736-02AD-4F16-A30D-E8CE8E1A6F6D/3c/4906f740/Single.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Bubble.cs" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="IdeDocumentHistory">
@@ -127,12 +146,12 @@
       <option name="presentableId" value="Default" />
       <updated>1574495490930</updated>
       <workItem from="1574495497713" duration="13000" />
-      <workItem from="1574495571639" duration="806000" />
+      <workItem from="1574495571639" duration="10436000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="819000" />
+    <option name="totallyTimeSpent" value="10449000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -192,26 +211,49 @@
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/Assets/Scripts/GridSystem.cs">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="210">
-          <caret line="14" column="8" lean-forward="true" selection-start-line="14" selection-start-column="8" selection-end-line="14" selection-end-column="8" />
+        <state relative-caret-position="225">
+          <caret line="15" column="8" lean-forward="true" selection-start-line="15" selection-start-column="8" selection-end-line="15" selection-end-column="8" />
           <folding>
-            <marker date="1574495737466" expanded="true" signature="6:92" ph="..." />
-            <marker date="1574495737466" expanded="true" signature="133:268" ph="{...}" />
-            <marker date="1574495737466" expanded="true" signature="160:204" ph="{...}" />
-            <marker date="1574495737466" expanded="true" signature="245:266" ph="{...}" />
+            <marker date="1574497727966" expanded="true" signature="6:92" ph="..." />
+            <marker date="1574497727966" expanded="true" signature="133:393" ph="{...}" />
+            <marker date="1574497727966" expanded="true" signature="201:245" ph="{...}" />
+            <marker date="1574497727966" expanded="true" signature="286:307" ph="{...}" />
+            <marker date="1574497727966" expanded="true" signature="355:391" ph="{...}" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/0FB38736-02AD-4F16-A30D-E8CE8E1A6F6D/3c/4906f740/Single.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="495">
+          <caret line="37" column="23" selection-start-line="37" selection-start-column="23" selection-end-line="37" selection-end-column="23" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/C0EF81E1-639B-423A-B35C-E0E4C08B5B7A/e3/06af36df/Mathf.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="480">
+          <caret line="37" column="45" selection-start-line="37" selection-start-column="45" selection-end-line="37" selection-end-column="45" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Assets/Scripts/Bubble.cs">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="270">
-          <caret line="18" lean-forward="true" selection-start-line="18" selection-end-line="18" />
+        <state relative-caret-position="735">
+          <caret line="49" column="64" selection-start-line="49" selection-start-column="64" selection-end-line="49" selection-end-column="64" />
           <folding>
-            <marker date="1574497617382" expanded="true" signature="6:92" ph="..." />
-            <marker date="1574497617382" expanded="true" signature="129:275" ph="{...}" />
-            <marker date="1574497617382" expanded="true" signature="194:215" ph="{...}" />
-            <marker date="1574497617382" expanded="true" signature="252:273" ph="{...}" />
+            <marker date="1574509452366" expanded="true" signature="6:121" ph="..." />
+            <marker date="1574509452366" expanded="true" signature="158:1792" ph="{...}" />
+            <marker date="1574509452366" expanded="true" signature="258:298" ph="{...}" />
+            <marker date="1574509452366" expanded="true" signature="325:365" ph="{...}" />
+            <marker date="1574509452366" expanded="true" signature="402:1165" ph="{...}" />
+            <marker date="1574509452366" expanded="true" signature="839:1159" ph="{...}" />
+            <marker date="1574509452366" expanded="true" signature="887:1150" ph="{...}" />
+            <marker date="1574509452366" expanded="true" signature="927:1022" ph="{...}" />
+            <marker date="1574509452366" expanded="true" signature="1042:1137" ph="{...}" />
+            <marker date="1574509452366" expanded="true" signature="1254:1790" ph="{...}" />
+            <marker date="1574509452366" expanded="true" signature="1375:1629" ph="{...}" />
+            <marker date="1574509452366" expanded="true" signature="1642:1775" ph="{...}" />
           </folding>
         </state>
       </provider>

@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class GridSystem : MonoBehaviour
 {
+    private static List<Bubble> bubbles;
     private void Start()
     {
         InitializeGridSystem();
@@ -13,5 +14,10 @@ public class GridSystem : MonoBehaviour
     private void InitializeGridSystem()
     {
         
+    }
+
+    public static List<Bubble> GetAllBubbles()
+    {
+        return bubbles;
     }
 }
