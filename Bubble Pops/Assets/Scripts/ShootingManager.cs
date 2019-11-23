@@ -38,7 +38,7 @@ public class ShootingManager : MonoBehaviour
                 lineRenderer.SetPosition(1,hit.point);
                 if (hit.collider.CompareTag("Wall"))
                 {
-                    var hit2 = new RaycastHit2D();
+                    RaycastHit2D hit2;
                     if (hit.point.x >= 0)
                     {
                         hit2 = Physics2D.Raycast(hit.point - Vector2.right*0.01f, Vector2.Reflect(hit.point - origin, Vector2.right), Mathf.Infinity);
@@ -48,7 +48,7 @@ public class ShootingManager : MonoBehaviour
                         hit2 = Physics2D.Raycast(hit.point + Vector2.right*0.01f, Vector2.Reflect(hit.point - origin, Vector2.right), Mathf.Infinity);
                     }
 
-                    lineRenderer.SetPosition(2,hit2.point);
+                    lineRenderer.SetPosition(2, !hit2.collider.CompareTag("Wall") ? hit2.point : hit.point);
                 }
                 else
                 {
