@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.Numerics;
@@ -12,6 +13,8 @@ public class ShootingManager : MonoBehaviour
     [SerializeField] private LineRenderer lineRenderer;
     [SerializeField] private Material transparentMaterial;
     [SerializeField] private Material defaultLineMaterial;
+    
+
     void Update()
     {
         DrawLine();
@@ -21,33 +24,38 @@ public class ShootingManager : MonoBehaviour
     {
         if (Input.GetMouseButton(0))
         {
-            var hit = Physics2D.Raycast(origin, (Vector2)cam.ScreenToWorldPoint(Input.mousePosition)-origin, Mathf.Infinity);
+
+            var mouseVector = (Vector2) cam.ScreenToWorldPoint(Input.mousePosition) - origin;
+            var hit = Physics2D.Raycast(origin,mouseVector , Mathf.Infinity);
             if (hit.collider != null)
             {
-                Debug.DrawLine(origin, hit.point,Color.yellow);
+                Debug.DrawLine(origin, hit.point,Color.green);
+                Debug.DrawRay(origin,hit.point-origin,Color.magenta);
+                Debug.DrawRay(hit.point,Vector2.Reflect(hit.point-origin,Vector2.right),Color.magenta);
                 lineRenderer.sharedMaterial = defaultLineMaterial;
+                
                 lineRenderer.SetPosition(0,origin);
                 lineRenderer.SetPosition(1,hit.point);
-                if (hit.collider.gameObject.CompareTag("Wall"))
+                if (hit.collider.CompareTag("Wall"))
                 {
-                    Vector2 newVector = Vector2.Reflect((Vector2)cam.ScreenToWorldPoint(Input.mousePosition)-origin, hit.normal);
-                    var hit2 = Physics2D.Raycast(hit.point, newVector, Mathf.Infinity);
-                    
-                    if (hit2.collider != null && !hit2.collider.gameObject.CompareTag("Wall"))
+                    var hit2 = new RaycastHit2D();
+                    if (hit.point.x >= 0)
                     {
-                        lineRenderer.SetPosition(2,hit2.point);
-                      //  Debug.Log(hit2.point);
+                        hit2 = Physics2D.Raycast(hit.point - Vector2.right*0.01f, Vector2.Reflect(hit.point - origin, Vector2.right), Mathf.Infinity);
                     }
                     else
                     {
-                       // Debug.Log("Nothing after wall");
-                        //  lineRenderer.SetPosition(2,hit.point);
+                        hit2 = Physics2D.Raycast(hit.point + Vector2.right*0.01f, Vector2.Reflect(hit.point - origin, Vector2.right), Mathf.Infinity);
                     }
+
+                    lineRenderer.SetPosition(2,hit2.point);
                 }
                 else
                 {
                     lineRenderer.SetPosition(2,hit.point);
                 }
+                
+               
             }
             else
             {
