@@ -25,7 +25,7 @@ public class ShootingManager : MonoBehaviour
     private Fly nextShot;
     private bool isActive = false;
     private bool isShooting = false;
-    private GameObject ghostBubble;
+    private GameObject ghostBubbleEffect;
     private void Start()
     {
         origin = originTransform.position;
@@ -106,14 +106,15 @@ public class ShootingManager : MonoBehaviour
                     
                 }
 
-                if (ghostBubble==null||(Vector2)ghostBubble.transform.position != secondPoint)
+                if (ghostBubbleEffect==null||(Vector2)ghostBubbleEffect.transform.position != secondPoint)
                 {
-                    Destroy(ghostBubble);
-                    ghostBubble = Instantiate(ghostBubblePrefab, secondPoint, Quaternion.identity);
+                    Destroy(ghostBubbleEffect);
+                    ghostBubbleEffect = Instantiate(ghostBubblePrefab, secondPoint, Quaternion.identity);
                 }
             }
             else
             {
+                Destroy(ghostBubbleEffect);
                 DeactivateLine();
             }
             
@@ -122,7 +123,7 @@ public class ShootingManager : MonoBehaviour
 
         if (Input.GetMouseButtonUp(0) && isActive && !isShooting)
         {
-            Destroy(ghostBubble);
+            Destroy(ghostBubbleEffect);
             DeactivateLine();
             if (secondPoint == Vector2.zero)
             {

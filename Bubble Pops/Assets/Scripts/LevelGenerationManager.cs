@@ -33,10 +33,10 @@ public class LevelGenerationManager : MonoBehaviour
                 
                 if (x == startHeight - 1)
                 {
-                    Instantiate(ghostBubblePrefab, startPosition+new Vector2(y*xGap + x%2*xGap/2.2f,-x*yGap), Quaternion.identity, parent.transform);
+                    Instantiate(ghostBubblePrefab, startPosition+new Vector2(y*xGap + x%2*xGap/2f,-x*yGap), Quaternion.identity, parent.transform);
                 }else
                 {
-                    Instantiate(bubblePrefab, startPosition+new Vector2(y*xGap + x%2*xGap/2.2f,-x*yGap), Quaternion.identity, parent.transform);
+                    Instantiate(bubblePrefab, startPosition+new Vector2(y*xGap + x%2*xGap/2f,-x*yGap), Quaternion.identity, parent.transform);
                 }
             }
             

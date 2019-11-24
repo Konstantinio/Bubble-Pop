@@ -13,21 +13,21 @@ public class Bubble : MonoBehaviour
 
     public bool isGhost;
 
-    //private float timer = 0.1f;
+  //  private float timer = 0.1f;
     private void Start()
     {
         InitializeBubble();
     }
 
-    private void Update()
-    {
-        InitializeBubble();
-        //timer -= Time.deltaTime;
-        // if (timer <= 0)
-        // {
-        //     Destroy(gameObject);
-        // }
-    }
+//    private void Update()
+//    {
+//        InitializeBubble();
+//        timer -= Time.deltaTime;
+//         if (timer <= 0)
+//         {
+//             Destroy(gameObject);
+//         }
+//    }
 
     private void InitializeBubble()
     {
