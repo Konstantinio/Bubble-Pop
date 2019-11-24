@@ -10,7 +10,7 @@ public class Fly : MonoBehaviour
     private Vector2 startPosition;
     private Vector2 neededPosition;
     private bool isFlying;
-    private const float TOLERANCE = 0.1f;
+    private const float TOLERANCE = 0.01f;
     private Vector2[] positions = new Vector2[0];
     private int index = 0;
     private float koef;

@@ -5,7 +5,8 @@ using UnityEngine;
 
 public class LevelGenerationManager : MonoBehaviour
 {
-    public GameObject ballPrefab;
+    public GameObject bubblePrefab;
+    public GameObject ghostBubblePrefab;
     public GameObject parent;
     public Vector2 startPosition;
     public float xGap;
@@ -18,14 +19,27 @@ public class LevelGenerationManager : MonoBehaviour
         GenerateBasicLevel();
     }
 
+//    private void Update()
+//    {
+//        GenerateBasicLevel();
+//    }
+
     private void GenerateBasicLevel()
     {
-        for (int y = 0; y < startHeight; y++)
+        for (int y = 0; y < lineLength; y++)
         {
-            for (int x = 0; x < lineLength; x++)
+            for (int x = 0; x < startHeight; x++)
             {
-                Instantiate(ballPrefab, startPosition+new Vector2(x*xGap + y%2*xGap/2.2f,-y*yGap), Quaternion.identity, parent.transform);
+                
+                if (x == startHeight - 1)
+                {
+                    Instantiate(ghostBubblePrefab, startPosition+new Vector2(y*xGap + x%2*xGap/2.2f,-x*yGap), Quaternion.identity, parent.transform);
+                }else
+                {
+                    Instantiate(bubblePrefab, startPosition+new Vector2(y*xGap + x%2*xGap/2.2f,-x*yGap), Quaternion.identity, parent.transform);
+                }
             }
+            
         }
     }
 }

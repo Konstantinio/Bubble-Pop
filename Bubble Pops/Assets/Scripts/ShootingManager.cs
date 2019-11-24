@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Collections.Specialized;
+using System.Linq;
 using UnityEngine;
 using Vector2 = UnityEngine.Vector2;
 
@@ -43,7 +44,8 @@ public class ShootingManager : MonoBehaviour
         if (Input.GetMouseButton(0))
         {
             var mouseVector = (Vector2) cam.ScreenToWorldPoint(Input.mousePosition) - origin;
-            var hit = Physics2D.Raycast(origin,mouseVector , Mathf.Infinity);
+            RaycastHit2D hit2 = new RaycastHit2D();
+            var hit = Physics2D.Raycast(origin,mouseVector , Mathf.Infinity,~(1<<9));
             if (hit.collider != null)
             {
                 firstPoint = hit.point;
@@ -56,19 +58,19 @@ public class ShootingManager : MonoBehaviour
                 lineRenderer.SetPosition(1,hit.point);
                 if (hit.collider.CompareTag("Wall"))
                 {
-                    RaycastHit2D hit2;
+                    
                     if (hit.point.x >= 0)
                     {
-                        hit2 = Physics2D.Raycast(hit.point - Vector2.right*0.01f, Vector2.Reflect(hit.point - origin, Vector2.right), Mathf.Infinity);
+                        hit2 = Physics2D.Raycast(hit.point - Vector2.right*0.01f, Vector2.Reflect(hit.point - origin, Vector2.right), Mathf.Infinity,~(1<<9));
                     }
                     else
                     {
-                        hit2 = Physics2D.Raycast(hit.point + Vector2.right*0.01f, Vector2.Reflect(hit.point - origin, Vector2.right), Mathf.Infinity);
+                        hit2 = Physics2D.Raycast(hit.point + Vector2.right*0.01f, Vector2.Reflect(hit.point - origin, Vector2.right), Mathf.Infinity,~(1<<9));
                     }
 
                     if (hit2.collider.CompareTag("Wall"))
                     {
-                        DiactivateLine();
+                        DeactivateLine();
                     }
                     else
                     {
@@ -78,29 +80,48 @@ public class ShootingManager : MonoBehaviour
                 }
                 else
                 {
-                    lineRenderer.SetPosition(2,hit.point);
+                    hit2 = hit;
                     secondPoint = Vector2.zero;
                 }
-                
-               
+                lineRenderer.SetPosition(2,hit2.point);
+                if (isActive)
+                {
+                   
+                    Bubble ghostBubble = hit2.collider.gameObject.GetComponent<Bubble>().nearBubbles.ToList().Where(a=>a!=null).OrderBy(x => Vector2.Distance(hit2.point, x.transform.position)).FirstOrDefault(y => y.isGhost);
+                    if (secondPoint == Vector2.zero)
+                    {
+                        firstPoint = ghostBubble.transform.position;
+                        secondPoint = firstPoint;
+                    }
+                    else
+                    {
+                        secondPoint = ghostBubble.transform.position;
+                    }
+                    
+                }
+              
+            
+              
             }
             else
             {
-                DiactivateLine();
+                DeactivateLine();
             }
             
-            
+           
         }
 
         if (Input.GetMouseButtonUp(0) && isActive && !isShooting)
         {
-            
+            DeactivateLine();
             if (secondPoint == Vector2.zero)
             {
+                Debug.Log("onepoint");
                 Shoot(firstPoint);
             }
             else
             {
+                
                 Shoot(firstPoint,secondPoint);
             }
 
@@ -119,7 +140,7 @@ public class ShootingManager : MonoBehaviour
         shot.Launch(new[]{position});
     }
 
-    private void DiactivateLine()
+    private void DeactivateLine()
     {
         isActive = false;
         lineRenderer.sharedMaterial = transparentMaterial;

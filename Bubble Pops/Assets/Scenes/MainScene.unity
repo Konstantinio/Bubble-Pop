@@ -369,12 +369,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 984afb9d4c1bc3341a70486075c3c726, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ballPrefab: {fileID: 6644952620262870008, guid: c2b6c3ae8a43eb14a9f0e34b75ee4ee3,
+  bubblePrefab: {fileID: 6644952620262870008, guid: c2b6c3ae8a43eb14a9f0e34b75ee4ee3,
+    type: 3}
+  ghostBubblePrefab: {fileID: 6644952620262870008, guid: 26904744a2fab6e409ab3142b2e7a6dc,
     type: 3}
   parent: {fileID: 1474084250}
   startPosition: {x: -2.03, y: 3.32}
-  xGap: 0.7
-  yGap: 0.57
+  xGap: 0.76
+  yGap: 0.68
 --- !u!1 &1474084250
 GameObject:
   m_ObjectHideFlags: 0

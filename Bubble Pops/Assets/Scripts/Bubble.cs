@@ -10,7 +10,8 @@ public class Bubble : MonoBehaviour
     public int indexer;
     public float maxDistance;
     public bool isShowingRedLines;
-   
+    public bool isGhost;
+    //private float timer = 0.1f;
     private void Start()
     {
         InitializeBubble();
@@ -19,6 +20,11 @@ public class Bubble : MonoBehaviour
     private void Update()
     {
         InitializeBubble();
+        //timer -= Time.deltaTime;
+       // if (timer <= 0)
+       // {
+       //     Destroy(gameObject);
+       // }
     }
 
     private void InitializeBubble()
