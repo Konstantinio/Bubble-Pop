@@ -102,8 +102,8 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   indexer: 0
-  maxDistance: 0.5
-  isShowingRedLines: 0
+  maxDistance: 3
+  isShowingRedLines: 1
   isGhost: 0
 --- !u!58 &6644952620262870012
 CircleCollider2D:
