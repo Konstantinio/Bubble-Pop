@@ -10,6 +10,7 @@ public class Bubble : MonoBehaviour
     public int indexer;
     public float maxDistance;
     public bool isShowingRedLines;
+   
     private void Start()
     {
         InitializeBubble();

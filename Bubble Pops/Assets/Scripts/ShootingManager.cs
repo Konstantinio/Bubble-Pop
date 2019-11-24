@@ -8,8 +8,10 @@ using Vector2 = UnityEngine.Vector2;
 public class ShootingManager : MonoBehaviour
 {
     [SerializeField] private Camera cam;
-    public Vector2 origin;
-    public Vector2 nextBubbleOrigin;
+    public Transform originTransform;
+    public Transform nextBubbleOriginTransform;
+    private Vector2 origin;
+    private Vector2 nextBubbleOrigin;
     [SerializeField] private LineRenderer lineRenderer;
     [SerializeField] private Material transparentMaterial;
     [SerializeField] private Material defaultLineMaterial;
@@ -18,10 +20,17 @@ public class ShootingManager : MonoBehaviour
     private Vector2 firstPoint;
     private Vector2 secondPoint;
     private Fly shot;
-
+    private Fly nextShot;
+    private bool isActive = false;
+    private bool isShooting = false;
     private void Start()
     {
+        origin = originTransform.position;
+        nextBubbleOrigin = nextBubbleOriginTransform.position;
         shot = Instantiate(prefab, origin, Quaternion.identity).GetComponent<Fly>();
+        nextShot = Instantiate(prefab, nextBubbleOrigin, Quaternion.identity).GetComponent<Fly>();
+        shot.manager = this;
+        nextShot.manager = this;
     }
 
     void Update()
@@ -33,7 +42,6 @@ public class ShootingManager : MonoBehaviour
     {
         if (Input.GetMouseButton(0))
         {
-
             var mouseVector = (Vector2) cam.ScreenToWorldPoint(Input.mousePosition) - origin;
             var hit = Physics2D.Raycast(origin,mouseVector , Mathf.Infinity);
             if (hit.collider != null)
@@ -42,7 +50,7 @@ public class ShootingManager : MonoBehaviour
                 Debug.DrawLine(origin, hit.point,Color.green);
                 Debug.DrawRay(origin,hit.point-origin,Color.magenta);
                 Debug.DrawRay(hit.point,Vector2.Reflect(hit.point-origin,Vector2.right),Color.magenta);
-                lineRenderer.sharedMaterial = defaultLineMaterial;
+                ActivateLine();
                 
                 lineRenderer.SetPosition(0,origin);
                 lineRenderer.SetPosition(1,hit.point);
@@ -60,8 +68,7 @@ public class ShootingManager : MonoBehaviour
 
                     if (hit2.collider.CompareTag("Wall"))
                     {
-                        lineRenderer.sharedMaterial = transparentMaterial;
-                        
+                        DiactivateLine();
                     }
                     else
                     {
@@ -72,20 +79,22 @@ public class ShootingManager : MonoBehaviour
                 else
                 {
                     lineRenderer.SetPosition(2,hit.point);
+                    secondPoint = Vector2.zero;
                 }
                 
                
             }
             else
             {
-                lineRenderer.sharedMaterial = transparentMaterial;
+                DiactivateLine();
             }
             
             
         }
 
-        if (Input.GetMouseButtonUp(0))
+        if (Input.GetMouseButtonUp(0) && isActive && !isShooting)
         {
+            
             if (secondPoint == Vector2.zero)
             {
                 Shoot(firstPoint);
@@ -94,26 +103,43 @@ public class ShootingManager : MonoBehaviour
             {
                 Shoot(firstPoint,secondPoint);
             }
-            
-           
+
+            isShooting = true;
         }
     }
 
     private void Shoot(Vector2 firstPosition, Vector2 secondPosition)
     {
+        
         shot.Launch(new[]{firstPosition,secondPosition});
-        Reload();
     }
     
     private void Shoot( Vector2 position)
     {
         shot.Launch(new[]{position});
-        Reload();
     }
 
-    private void Reload()
+    private void DiactivateLine()
     {
-//        throw new NotImplementedException();
+        isActive = false;
+        lineRenderer.sharedMaterial = transparentMaterial;
     }
+
+    private void ActivateLine()
+    {
+        isActive = true;
+        lineRenderer.sharedMaterial = defaultLineMaterial;
+    }
+
+    public void Reload()
+    {
+        nextShot.transform.position = origin;
+        shot = nextShot;
+        nextShot = Instantiate(prefab, nextBubbleOrigin, Quaternion.identity).GetComponent<Fly>();
+        nextShot.manager = this;
+        isShooting = false;
+    }
+    
+    
 
 }
