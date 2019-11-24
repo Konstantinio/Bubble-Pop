@@ -2,7 +2,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Collections.Specialized;
-using System.Numerics;
 using UnityEngine;
 using Vector2 = UnityEngine.Vector2;
 
@@ -10,10 +9,20 @@ public class ShootingManager : MonoBehaviour
 {
     [SerializeField] private Camera cam;
     public Vector2 origin;
+    public Vector2 nextBubbleOrigin;
     [SerializeField] private LineRenderer lineRenderer;
     [SerializeField] private Material transparentMaterial;
     [SerializeField] private Material defaultLineMaterial;
-    
+    [SerializeField] private ColorConfiguration colorConfiguration;
+    [SerializeField] private GameObject prefab;
+    private Vector2 firstPoint;
+    private Vector2 secondPoint;
+    private Fly shot;
+
+    private void Start()
+    {
+        shot = Instantiate(prefab, origin, Quaternion.identity).GetComponent<Fly>();
+    }
 
     void Update()
     {
@@ -29,6 +38,7 @@ public class ShootingManager : MonoBehaviour
             var hit = Physics2D.Raycast(origin,mouseVector , Mathf.Infinity);
             if (hit.collider != null)
             {
+                firstPoint = hit.point;
                 Debug.DrawLine(origin, hit.point,Color.green);
                 Debug.DrawRay(origin,hit.point-origin,Color.magenta);
                 Debug.DrawRay(hit.point,Vector2.Reflect(hit.point-origin,Vector2.right),Color.magenta);
@@ -56,6 +66,7 @@ public class ShootingManager : MonoBehaviour
                     else
                     {
                         lineRenderer.SetPosition(2, hit2.point);
+                        secondPoint = hit2.point;
                     }
                 }
                 else
@@ -69,8 +80,40 @@ public class ShootingManager : MonoBehaviour
             {
                 lineRenderer.sharedMaterial = transparentMaterial;
             }
+            
+            
+        }
+
+        if (Input.GetMouseButtonUp(0))
+        {
+            if (secondPoint == Vector2.zero)
+            {
+                Shoot(firstPoint);
+            }
+            else
+            {
+                Shoot(firstPoint,secondPoint);
+            }
+            
+           
         }
     }
+
+    private void Shoot(Vector2 firstPosition, Vector2 secondPosition)
+    {
+        shot.Launch(new[]{firstPosition,secondPosition});
+        Reload();
+    }
     
-    
+    private void Shoot( Vector2 position)
+    {
+        shot.Launch(new[]{position});
+        Reload();
+    }
+
+    private void Reload()
+    {
+//        throw new NotImplementedException();
+    }
+
 }

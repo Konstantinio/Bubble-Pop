@@ -8,6 +8,9 @@
       <e p="Assets" t="Include">
         <e p="Scripts" t="Include">
           <e p="Bubble.cs" t="Include" />
+          <e p="ColorConfiguration.cs" t="Include" />
+          <e p="ColorPower.cs" t="Include" />
+          <e p="Fly.cs" t="Include" />
           <e p="LevelGenerationManager.cs" t="Include" />
           <e p="ShootingManager.cs" t="Include" />
         </e>
