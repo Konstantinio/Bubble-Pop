@@ -18,12 +18,14 @@ public class ShootingManager : MonoBehaviour
     [SerializeField] private Material defaultLineMaterial;
     [SerializeField] private ColorConfiguration colorConfiguration;
     [SerializeField] private GameObject prefab;
+    [SerializeField] private GameObject ghostBubblePrefab;
     private Vector2 firstPoint;
     private Vector2 secondPoint;
     private Fly shot;
     private Fly nextShot;
     private bool isActive = false;
     private bool isShooting = false;
+    private GameObject ghostBubble;
     private void Start()
     {
         origin = originTransform.position;
@@ -88,20 +90,27 @@ public class ShootingManager : MonoBehaviour
                 {
                    
                     Bubble ghostBubble = hit2.collider.gameObject.GetComponent<Bubble>().nearBubbles.ToList().Where(a=>a!=null).OrderBy(x => Vector2.Distance(hit2.point, x.transform.position)).FirstOrDefault(y => y.isGhost);
-                    if (secondPoint == Vector2.zero)
+                    if (ghostBubble != null)
                     {
-                        firstPoint = ghostBubble.transform.position;
-                        secondPoint = firstPoint;
+                        if (secondPoint == Vector2.zero)
+                        {
+                            firstPoint = ghostBubble.transform.position;
+                            secondPoint = firstPoint;
+                        }
+                        else
+                        {
+                            secondPoint = ghostBubble.transform.position;
+                        }
                     }
-                    else
-                    {
-                        secondPoint = ghostBubble.transform.position;
-                    }
+                   
                     
                 }
-              
-            
-              
+
+                if (ghostBubble==null||(Vector2)ghostBubble.transform.position != secondPoint)
+                {
+                    Destroy(ghostBubble);
+                    ghostBubble = Instantiate(ghostBubblePrefab, secondPoint, Quaternion.identity);
+                }
             }
             else
             {
@@ -113,6 +122,7 @@ public class ShootingManager : MonoBehaviour
 
         if (Input.GetMouseButtonUp(0) && isActive && !isShooting)
         {
+            Destroy(ghostBubble);
             DeactivateLine();
             if (secondPoint == Vector2.zero)
             {

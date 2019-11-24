@@ -10,11 +10,9 @@ GameObject:
   m_Component:
   - component: {fileID: 6644952620262870014}
   - component: {fileID: 6644952620262870015}
-  - component: {fileID: 6644952620262870013}
-  - component: {fileID: 6644952620262870012}
-  - component: {fileID: 3974838252710623549}
-  m_Layer: 8
-  m_Name: Bubble
+  - component: {fileID: 1985896004}
+  m_Layer: 9
+  m_Name: GhostBubbleEffect
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -27,7 +25,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6644952620262870008}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 3.77, y: 1.37, z: 0}
   m_LocalScale: {x: 0.36, y: 0.36, z: 0.6024}
   m_Children: []
@@ -72,7 +70,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 7d706c40037c8704c9389785f20083f7, type: 3}
-  m_Color: {r: 0, g: 0, b: 0, a: 1}
+  m_Color: {r: 0, g: 0.13481307, b: 1, a: 0.2509804}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -82,56 +80,19 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &6644952620262870013
-MonoBehaviour:
+--- !u!111 &1985896004
+Animation:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6644952620262870008}
   m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d4d03a68c42187c46a4f701d31b8fe82, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  nearBubbles:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  indexer: 0
-  maxDistance: 0.5
-  isShowingRedLines: 0
-  isGhost: 0
---- !u!58 &6644952620262870012
-CircleCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6644952620262870008}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  serializedVersion: 2
-  m_Radius: 1.0799999
---- !u!114 &3974838252710623549
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6644952620262870008}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8216d19b5e7ed2c429aa0ac795ef477a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  speed: 65
-  manager: {fileID: 0}
+  serializedVersion: 3
+  m_Animation: {fileID: 7400000, guid: 520a94b3f61e75d4b8c08a6aed98a5c2, type: 2}
+  m_Animations:
+  - {fileID: 7400000, guid: 520a94b3f61e75d4b8c08a6aed98a5c2, type: 2}
+  m_WrapMode: 0
+  m_PlayAutomatically: 1
+  m_AnimatePhysics: 0
+  m_CullingType: 0

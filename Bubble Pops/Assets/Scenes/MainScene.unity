@@ -218,6 +218,8 @@ MonoBehaviour:
   defaultLineMaterial: {fileID: 2100000, guid: 342b3d248e2342649b340a220bede028, type: 2}
   colorConfiguration: {fileID: 669057765}
   prefab: {fileID: 6644952620262870008, guid: c2b6c3ae8a43eb14a9f0e34b75ee4ee3, type: 3}
+  ghostBubblePrefab: {fileID: 6644952620262870008, guid: b242299db1203844e801accdce9be006,
+    type: 3}
 --- !u!4 &669057764
 Transform:
   m_ObjectHideFlags: 0
