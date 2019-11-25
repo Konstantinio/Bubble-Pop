@@ -20,6 +20,7 @@ public class Bubble : MonoBehaviour
     public bool isGhost;
     public LevelGenerationManager manager;
     public CrushingManager crushingManager;
+    public float startGap;
 
     private void Start()
     {
@@ -53,7 +54,7 @@ public class Bubble : MonoBehaviour
      
     }
 
-    private void Update()
+    public void Update()
     {
         InitializeBubble();
     }
@@ -147,25 +148,26 @@ public class Bubble : MonoBehaviour
                 switch (index)
                 {
                     case 0:
-                        endPosition = new Vector2(x - 0.322f, y + 0.64f); //Vector2.left + Vector2.up;
+                        endPosition = new Vector2(x - 0.37f, y + 0.64f); //Vector2.left + Vector2.up;
                         break;
                     case 1:
-                        endPosition = new Vector2(x + 0.322f, y + 0.64f); // Vector2.right + Vector2.up;
+                        endPosition = new Vector2(x + 0.37f, y + 0.64f); // Vector2.right + Vector2.up;
                         break;
                     case 2:
-                        endPosition = new Vector2(x + 0.692f + 0.05f, y); //Vector2.right;
+                        endPosition = new Vector2(x + 0.74f, y); //Vector2.right;
                         break;
                     case 3:
-                        endPosition = new Vector2(x + 0.322f + 0.07f, y - 0.64f); //Vector2.right + Vector2.down;
+                        endPosition = new Vector2(x + 0.37f, y - 0.64f); //Vector2.right + Vector2.down;
                         break;
                     case 4:
-                        endPosition = new Vector2(x - 0.322f, y - 0.64f); //Vector2.left + Vector2.down;
+                        endPosition = new Vector2(x - 0.37f, y - 0.64f); //Vector2.left + Vector2.down;
                         break;
                     case 5:
-                        endPosition = new Vector2(x - 0.692f, y); //Vector2.left;
+                        endPosition = new Vector2(x - 0.74f, y); //Vector2.left;
                         break;
                 }
 
+                endPosition += new Vector2(0.05f*startGap, 0);
                 return Instantiate(ghostBubblePrefab, endPosition, Quaternion.identity).GetComponent<Bubble>();
             }
             else

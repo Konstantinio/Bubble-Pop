@@ -15,6 +15,7 @@ public class CrushingManager : MonoBehaviour
         {
            
             var highest = CrushingBubbles.OrderByDescending(x => x.transform.position.y).ToArray()[0];
+            Debug.Log(highest.GetComponent<Bubble>().indexer);
             highest.GetComponent<Crush>().isHighest = true;
             var position = (Vector2)highest.transform.position;
             highest.GetComponent<Bubble>().SetIndexer(highest.GetComponent<Bubble>().indexer*(int)Math.Pow(2,CrushingBubbles.Count-1));

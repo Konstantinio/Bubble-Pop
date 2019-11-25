@@ -36,6 +36,7 @@ public class Fly : MonoBehaviour
         isHitted = true;
         Destroy(currentGhostBubble.gameObject);
         GetComponent<Bubble>().StartChain();
+        GetComponent<Bubble>().Update();
         GetComponent<Bubble>().crushingManager.Crush();
         GetComponent<Bubble>().manager.RefreshIsVisited();
         

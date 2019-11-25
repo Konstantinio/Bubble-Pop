@@ -15,7 +15,7 @@ public class LevelGenerationManager : MonoBehaviour
     public Vector2 startPosition;
     public float xGap;
     public float yGap;
-    private int lineLength = 6;
+    private int lineLength =  6;
     private int startHeight = 5;
     [SerializeField] private Camera _camera;
     [SerializeField] private ColorConfiguration colorConfiguration;
@@ -43,7 +43,7 @@ public class LevelGenerationManager : MonoBehaviour
             {
                 GameObject newBubble;
                 newBubble =   Instantiate(bubblePrefab, startPosition+new Vector2(y*xGap + x%2*xGap/2f,-x*yGap), Quaternion.identity, parent.transform);
-                
+                newBubble.GetComponent<Bubble>().startGap = x % 2*xGap/2f;
                     int indexer = (int) Math.Pow(2, Random.Range(1, 6));
                     newBubble.GetComponent<Bubble>().SetIndexer(indexer);
                     newBubble.GetComponent<Fly>().isHitted = true;
