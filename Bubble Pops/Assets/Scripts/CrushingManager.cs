@@ -22,6 +22,14 @@ public class CrushingManager : MonoBehaviour
             highest.GetComponent<SpriteRenderer>().color = ColorConfiguration.colorPowers
                 .FirstOrDefault(x => x.indexer == highest.GetComponent<Bubble>().indexer).color;
             CrushingBubbles.ForEach(x => x.GetComponent<Crush>().Fly(position));
+            
+            foreach (var bubble in CrushingBubbles)
+            {
+                if (bubble != highest)
+                {
+                    Destroy(bubble.gameObject);
+                }
+            }
             CrushingBubbles = new List<Fly>();
         }
        
