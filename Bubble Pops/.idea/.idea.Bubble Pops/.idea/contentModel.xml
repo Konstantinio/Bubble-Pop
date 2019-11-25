@@ -10,6 +10,8 @@
           <e p="Bubble.cs" t="Include" />
           <e p="ColorConfiguration.cs" t="Include" />
           <e p="ColorPower.cs" t="Include" />
+          <e p="Crush.cs" t="Include" />
+          <e p="CrushingManager.cs" t="Include" />
           <e p="Fly.cs" t="Include" />
           <e p="LevelGenerationManager.cs" t="Include" />
           <e p="ShootingManager.cs" t="Include" />

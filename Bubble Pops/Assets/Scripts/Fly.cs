@@ -9,7 +9,7 @@ public class Fly : MonoBehaviour
     public float speed;
     private Vector2 startPosition;
     private Vector2 neededPosition;
-    private bool isFlying;
+    public bool isFlying;
     private const float TOLERANCE = 0.01f;
     private Vector2[] positions = new Vector2[0];
     private int index = 0;
@@ -22,6 +22,7 @@ public class Fly : MonoBehaviour
         var position = transform.position;
         startPosition = position;
         neededPosition = position;
+        
     }
 
     private void Update()
@@ -35,6 +36,7 @@ public class Fly : MonoBehaviour
         isHitted = true;
         Destroy(currentGhostBubble.gameObject);
         GetComponent<Bubble>().StartChain();
+        GetComponent<Bubble>().crushingManager.Crush();
         GetComponent<Bubble>().manager.RefreshIsVisited();
         
     }
@@ -58,7 +60,6 @@ public class Fly : MonoBehaviour
                     koef = 0;
                     manager.Reload();
                     Hit();
-                    
                     enabled = false;
                 }
                 index++;

@@ -191,6 +191,7 @@ GameObject:
   - component: {fileID: 6644952620262870013}
   - component: {fileID: 6644952620262870012}
   - component: {fileID: 3974838252710623549}
+  - component: {fileID: 1094752238178008763}
   m_Layer: 8
   m_Name: Bubble
   m_TagString: Untagged
@@ -289,8 +290,8 @@ MonoBehaviour:
   numberText: {fileID: 2493490238909708295}
   isVisited: 0
   isGhost: 0
-  isShot: 0
   manager: {fileID: 0}
+  crushingManager: {fileID: 0}
 --- !u!58 &6644952620262870012
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -320,8 +321,24 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 65
+  isFlying: 0
   manager: {fileID: 0}
   currentGhostBubble: {fileID: 0}
+  isHitted: 0
+--- !u!114 &1094752238178008763
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6644952620262870008}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d3b3cb7eb10174946b95e322c2aeb6b0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 70
+  isHighest: 0
 --- !u!1 &8320275632230417662
 GameObject:
   m_ObjectHideFlags: 0
@@ -391,15 +408,13 @@ MonoBehaviour:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
     m_FontSize: 19
     m_FontStyle: 1
-    m_BestFit: 0
+    m_BestFit: 1
     m_MinSize: 0
-    m_MaxSize: 300
+    m_MaxSize: 19
     m_Alignment: 4
     m_AlignByGeometry: 0
     m_RichText: 1
     m_HorizontalOverflow: 0
-    m_VerticalOverflow: 0
+    m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: '2
-
-'
+  m_Text: 2

@@ -19,12 +19,13 @@ public class Bubble : MonoBehaviour
     public bool isVisited;
     public bool isGhost;
     public LevelGenerationManager manager;
+    public CrushingManager crushingManager;
 
-    //  private float timer = 0.1f;
     private void Start()
     {
         InitializeBubble();
         manager = GameObject.FindGameObjectWithTag("LevelGenerationManager").GetComponent<LevelGenerationManager>();
+        crushingManager = manager.GetComponent<CrushingManager>();
         if (!isGhost)
         {
             manager.allBubbles.Add(gameObject);
@@ -36,31 +37,25 @@ public class Bubble : MonoBehaviour
         Bubble[] nearBubblesWithoutNulls = nearBubbles.Where(x => x != null).ToArray();
         if (!isVisited && !isGhost)
         {
+            
             isVisited = true;
 
             var collection = nearBubblesWithoutNulls.Where(x => x.indexer == indexer).ToList();
             collection.ForEach(y => y.StartChain());
             if (collection.Count != 0)
             {
+               
                 nearBubblesWithoutNulls.Where(c => c.isGhost).ToList().ForEach(x => Destroy(x.gameObject));
-                Destroy(gameObject);
-                // GetComponent<SpriteRenderer>().color = Color.clear;
-                // foreach (Transform child in transform)
-                //  {
-                //      child.gameObject.SetActive(false);
-                //  }
+             //   Destroy(gameObject);
+                crushingManager.CrushingBubbles.Add(gameObject.GetComponent<Fly>());
             }
         }
+     
     }
 
     private void Update()
     {
         InitializeBubble();
-//        timer -= Time.deltaTime;
-//         if (timer <= 0)
-//         {
-//             Destroy(gameObject);
-//         }
     }
 
     public void SetIndexer(int _indexer)
@@ -71,39 +66,36 @@ public class Bubble : MonoBehaviour
 
     private void InitializeBubble()
     {
+        Vector2 p = transform.position;
+        SetNearBubble(0, ShootRay(p, 0));
+        SetNearBubble(1, ShootRay(p, 1));
+        SetNearBubble(2, ShootRay(p, 2));
+        SetNearBubble(3, ShootRay(p, 3));
+        SetNearBubble(4, ShootRay(p, 4));
+        SetNearBubble(5, ShootRay(p, 5));
 
-            Vector2 p = transform.position;
-            SetNearBubble(0, ShootRay(p, 0));
-            SetNearBubble(1, ShootRay(p, 1));
-            SetNearBubble(2, ShootRay(p, 2));
-            SetNearBubble(3, ShootRay(p, 3));
-            SetNearBubble(4, ShootRay(p, 4));
-            SetNearBubble(5, ShootRay(p, 5));
-        
-            for (int i = 0; i < 6; i++)
+        for (int i = 0; i < 6; i++)
+        {
+            if (nearBubbles[i] != null)
             {
-                if (nearBubbles[i] != null)
+                if (i <= 2)
                 {
-                    if (i <= 2)
-                    {
-                        nearBubbles[i].nearBubbles[i + 3] = this;
-                    }
-                    else
-                    {
-                        nearBubbles[i].nearBubbles[i - 3] = this;
-                    }
+                    nearBubbles[i].nearBubbles[i + 3] = this;
                 }
-                
+                else
+                {
+                    nearBubbles[i].nearBubbles[i - 3] = this;
+                }
+            }
         }
-        
     }
 
     private void SetNearBubble(int index, Bubble bubbleToSet)
     {
         // if (nearBubbles[index] == null)
-       // {
+        // {
         nearBubbles[index] = bubbleToSet;
-       // }
+        // }
     }
 
 

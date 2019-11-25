@@ -44,7 +44,7 @@ public class LevelGenerationManager : MonoBehaviour
                 GameObject newBubble;
                 newBubble =   Instantiate(bubblePrefab, startPosition+new Vector2(y*xGap + x%2*xGap/2f,-x*yGap), Quaternion.identity, parent.transform);
                 
-                    int indexer = (int) Math.Pow(2, Random.Range(1, 4));
+                    int indexer = (int) Math.Pow(2, Random.Range(1, 6));
                     newBubble.GetComponent<Bubble>().SetIndexer(indexer);
                     newBubble.GetComponent<Fly>().isHitted = true;
                     newBubble.GetComponent<SpriteRenderer>().color =
