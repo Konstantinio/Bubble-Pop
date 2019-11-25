@@ -190,7 +190,6 @@ GameObject:
   m_Component:
   - component: {fileID: 669057764}
   - component: {fileID: 669057763}
-  - component: {fileID: 669057765}
   m_Layer: 0
   m_Name: Shooting Manager
   m_TagString: Untagged
@@ -216,7 +215,7 @@ MonoBehaviour:
   lineRenderer: {fileID: 1667713120}
   transparentMaterial: {fileID: 2100000, guid: 9ae33c5f1fb3294469b7da1fcbd53648, type: 2}
   defaultLineMaterial: {fileID: 2100000, guid: 342b3d248e2342649b340a220bede028, type: 2}
-  colorConfiguration: {fileID: 669057765}
+  colorConfiguration: {fileID: 1343683045}
   prefab: {fileID: 6644952620262870008, guid: c2b6c3ae8a43eb14a9f0e34b75ee4ee3, type: 3}
   ghostBubblePrefab: {fileID: 6644952620262870008, guid: b242299db1203844e801accdce9be006,
     type: 3}
@@ -234,21 +233,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &669057765
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 669057762}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f998b69becdd088439cc8843ff728a49, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  colorPowers:
-  - indexer: 0
-    color: {r: 0, g: 0, b: 0, a: 0}
 --- !u!1 &794711113
 GameObject:
   m_ObjectHideFlags: 0
@@ -338,6 +322,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1343683043}
   - component: {fileID: 1343683044}
+  - component: {fileID: 1343683045}
   m_Layer: 0
   m_Name: Level Generation Manager
   m_TagString: Untagged
@@ -379,6 +364,27 @@ MonoBehaviour:
   startPosition: {x: -2.03, y: 3.746}
   xGap: 0.74
   yGap: 0.64
+  _camera: {fileID: 1694711575}
+  colorConfiguration: {fileID: 1343683045}
+--- !u!114 &1343683045
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1343683042}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f998b69becdd088439cc8843ff728a49, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  colorPowers:
+  - indexer: 2
+    color: {r: 1, g: 0.4811321, b: 0.4811321, a: 1}
+  - indexer: 4
+    color: {r: 0.2924528, g: 0.61708516, b: 1, a: 1}
+  - indexer: 8
+    color: {r: 0.39649343, g: 0.9339623, b: 0.527059, a: 1}
 --- !u!1 &1474084250
 GameObject:
   m_ObjectHideFlags: 0

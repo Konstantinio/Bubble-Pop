@@ -2,7 +2,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using JetBrains.Annotations;
+using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Bubble : MonoBehaviour
 {
@@ -10,6 +12,8 @@ public class Bubble : MonoBehaviour
     public int indexer;
     public float maxDistance;
     public bool isShowingRedLines;
+    public Text numberText;
+        
 
     public bool isGhost;
 
@@ -29,6 +33,11 @@ public class Bubble : MonoBehaviour
 //         }
 //    }
 
+    public void SetIndexer(int _indexer)
+    {
+        indexer = _indexer;
+        numberText.text = _indexer.ToString();
+    }
     private void InitializeBubble()
     {
         Vector2 p = transform.position;
