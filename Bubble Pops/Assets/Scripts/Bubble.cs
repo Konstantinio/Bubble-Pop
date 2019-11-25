@@ -42,7 +42,7 @@ public class Bubble : MonoBehaviour
             collection.ForEach(y => y.StartChain());
             if (collection.Count != 0)
             {
-                nearBubblesWithoutNulls.Where(c => c.isGhost).ToList().ForEach(Destroy);
+                nearBubblesWithoutNulls.Where(c => c.isGhost).ToList().ForEach(x => Destroy(x.gameObject));
                 Destroy(gameObject);
                 // GetComponent<SpriteRenderer>().color = Color.clear;
                 // foreach (Transform child in transform)
