@@ -15,7 +15,8 @@ public class Fly : MonoBehaviour
     private int index = 0;
     private float koef;
     public ShootingManager manager;
-
+    public Bubble currentGhostBubble;
+    public bool isHitted;
     private void Start()
     {
         var position = transform.position;
@@ -31,6 +32,10 @@ public class Fly : MonoBehaviour
 
     private void Hit()
     {
+        isHitted = true;
+        Destroy(currentGhostBubble.gameObject);
+        GetComponent<Bubble>().StartChain();
+        GetComponent<Bubble>().manager.RefreshIsVisited();
         
     }
 
@@ -50,10 +55,11 @@ public class Fly : MonoBehaviour
                 {
                     isFlying = false;
                     index = 0;
-                    koef = 0; 
-                    enabled = false;
+                    koef = 0;
                     manager.Reload();
                     Hit();
+                    
+                    enabled = false;
                 }
                 index++;
             } 

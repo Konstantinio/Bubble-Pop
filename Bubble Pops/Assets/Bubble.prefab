@@ -274,6 +274,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d4d03a68c42187c46a4f701d31b8fe82, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ghostBubblePrefab: {fileID: 6644952620262870008, guid: 26904744a2fab6e409ab3142b2e7a6dc,
+    type: 3}
   nearBubbles:
   - {fileID: 0}
   - {fileID: 0}
@@ -282,10 +284,13 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   indexer: 0
-  maxDistance: 3
-  isShowingRedLines: 0
+  maxDistance: 1
+  isShowingRedLines: 1
   numberText: {fileID: 2493490238909708295}
+  isVisited: 0
   isGhost: 0
+  isShot: 0
+  manager: {fileID: 0}
 --- !u!58 &6644952620262870012
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -316,6 +321,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 65
   manager: {fileID: 0}
+  currentGhostBubble: {fileID: 0}
 --- !u!1 &8320275632230417662
 GameObject:
   m_ObjectHideFlags: 0

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using JetBrains.Annotations;
 using TMPro;
 using UnityEngine;
@@ -8,76 +9,133 @@ using UnityEngine.UI;
 
 public class Bubble : MonoBehaviour
 {
+    public GameObject ghostBubblePrefab;
     public Bubble[] nearBubbles = new Bubble[6];
     public int indexer;
     public float maxDistance;
     public bool isShowingRedLines;
     public Text numberText;
-        
 
+    public bool isVisited;
     public bool isGhost;
+    public LevelGenerationManager manager;
 
-  //  private float timer = 0.1f;
+    //  private float timer = 0.1f;
     private void Start()
     {
         InitializeBubble();
+        manager = GameObject.FindGameObjectWithTag("LevelGenerationManager").GetComponent<LevelGenerationManager>();
+        if (!isGhost)
+        {
+            manager.allBubbles.Add(gameObject);
+        }
     }
 
-//    private void Update()
-//    {
-//        InitializeBubble();
+    public void StartChain()
+    {
+        Bubble[] nearBubblesWithoutNulls = nearBubbles.Where(x => x != null).ToArray();
+        if (!isVisited && !isGhost)
+        {
+            isVisited = true;
+
+            var collection = nearBubblesWithoutNulls.Where(x => x.indexer == indexer).ToList();
+            collection.ForEach(y => y.StartChain());
+            if (collection.Count != 0)
+            {
+                nearBubblesWithoutNulls.Where(c => c.isGhost).ToList().ForEach(Destroy);
+                Destroy(gameObject);
+                // GetComponent<SpriteRenderer>().color = Color.clear;
+                // foreach (Transform child in transform)
+                //  {
+                //      child.gameObject.SetActive(false);
+                //  }
+            }
+        }
+    }
+
+    private void Update()
+    {
+        InitializeBubble();
 //        timer -= Time.deltaTime;
 //         if (timer <= 0)
 //         {
 //             Destroy(gameObject);
 //         }
-//    }
+    }
 
     public void SetIndexer(int _indexer)
     {
         indexer = _indexer;
         numberText.text = _indexer.ToString();
-        
     }
+
     private void InitializeBubble()
     {
-        Vector2 p = transform.position;
-        SetNearBubble(0, ShootRay(p, Vector2.left + Vector2.up));
-        SetNearBubble(1, ShootRay(p, Vector2.right + Vector2.up));
-        SetNearBubble(2, ShootRay(p, Vector2.right));
-        SetNearBubble(3, ShootRay(p, Vector2.right + Vector2.down));
-        SetNearBubble(4, ShootRay(p, Vector2.left + Vector2.down));
-        SetNearBubble(5, ShootRay(p, Vector2.left));
 
-        for (int i = 0; i < 6; i++)
-        {
-            if (nearBubbles[i] != null)
+            Vector2 p = transform.position;
+            SetNearBubble(0, ShootRay(p, 0));
+            SetNearBubble(1, ShootRay(p, 1));
+            SetNearBubble(2, ShootRay(p, 2));
+            SetNearBubble(3, ShootRay(p, 3));
+            SetNearBubble(4, ShootRay(p, 4));
+            SetNearBubble(5, ShootRay(p, 5));
+        
+            for (int i = 0; i < 6; i++)
             {
-                if (i <= 2)
+                if (nearBubbles[i] != null)
                 {
-                    nearBubbles[i].nearBubbles[i + 3] = this;
+                    if (i <= 2)
+                    {
+                        nearBubbles[i].nearBubbles[i + 3] = this;
+                    }
+                    else
+                    {
+                        nearBubbles[i].nearBubbles[i - 3] = this;
+                    }
                 }
-                else
-                {
-                    nearBubbles[i].nearBubbles[i - 3] = this;
-                }
-            }
+                
         }
+        
     }
 
     private void SetNearBubble(int index, Bubble bubbleToSet)
     {
-        if (nearBubbles[index] == null)
-        {
-            nearBubbles[index] = bubbleToSet;
-        }
+        // if (nearBubbles[index] == null)
+       // {
+        nearBubbles[index] = bubbleToSet;
+       // }
     }
 
 
     [CanBeNull]
-    private Bubble ShootRay(Vector2 startPosition, Vector2 endPosition)
+    private Bubble ShootRay(Vector2 startPosition, int index)
     {
-        var hit = Physics2D.Raycast(startPosition, endPosition, maxDistance,~(1<<10));
+        var x = startPosition.x;
+        var y = startPosition.y;
+        var endPosition = Vector2.zero;
+        switch (index)
+        {
+            case 0:
+                endPosition = Vector2.left + Vector2.up;
+                break;
+            case 1:
+                endPosition = Vector2.right + Vector2.up;
+                break;
+            case 2:
+                endPosition = Vector2.right;
+                break;
+            case 3:
+                endPosition = Vector2.right + Vector2.down;
+                break;
+            case 4:
+                endPosition = Vector2.left + Vector2.down;
+                break;
+            case 5:
+                endPosition = Vector2.left;
+                break;
+        }
+
+        var hit = Physics2D.Raycast(startPosition, endPosition.normalized, maxDistance, ~(1 << 10));
         if (hit.collider != null && hit.collider.gameObject.GetComponent<Bubble>() != null)
         {
             var bubble = hit.collider.gameObject.GetComponent<Bubble>();
@@ -92,7 +150,36 @@ public class Bubble : MonoBehaviour
                 Debug.DrawRay(startPosition, endPosition * 1000, Color.red);
             }
 
-            return null;
+            if (!isGhost && nearBubbles[index] == null && GetComponent<Fly>().isHitted)
+            {
+                switch (index)
+                {
+                    case 0:
+                        endPosition = new Vector2(x - 0.322f, y + 0.64f); //Vector2.left + Vector2.up;
+                        break;
+                    case 1:
+                        endPosition = new Vector2(x + 0.322f, y + 0.64f); // Vector2.right + Vector2.up;
+                        break;
+                    case 2:
+                        endPosition = new Vector2(x + 0.692f + 0.05f, y); //Vector2.right;
+                        break;
+                    case 3:
+                        endPosition = new Vector2(x + 0.322f + 0.07f, y - 0.64f); //Vector2.right + Vector2.down;
+                        break;
+                    case 4:
+                        endPosition = new Vector2(x - 0.322f, y - 0.64f); //Vector2.left + Vector2.down;
+                        break;
+                    case 5:
+                        endPosition = new Vector2(x - 0.692f, y); //Vector2.left;
+                        break;
+                }
+
+                return Instantiate(ghostBubblePrefab, endPosition, Quaternion.identity).GetComponent<Bubble>();
+            }
+            else
+            {
+                return null;
+            }
         }
     }
 }

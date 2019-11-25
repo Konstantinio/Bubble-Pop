@@ -8,6 +8,7 @@ using Random = UnityEngine.Random;
 
 public class LevelGenerationManager : MonoBehaviour
 {
+    public List<GameObject> allBubbles;
     public GameObject bubblePrefab;
     public GameObject ghostBubblePrefab;
     public GameObject parent;
@@ -21,9 +22,14 @@ public class LevelGenerationManager : MonoBehaviour
 
     private void Start()
     {
+        allBubbles = new List<GameObject>();
         GenerateBasicLevel();
     }
 
+    public void RefreshIsVisited()
+    {
+        allBubbles.Where(x => x != null).ToList().ForEach(x=>x.GetComponent<Bubble>().isVisited=false);
+    }
 //    private void Update()
 //    {
 //        GenerateBasicLevel();
@@ -36,27 +42,15 @@ public class LevelGenerationManager : MonoBehaviour
             for (int x = 0; x < startHeight; x++)
             {
                 GameObject newBubble;
-                if (x == startHeight - 1)
-                {
-                   newBubble =  Instantiate(ghostBubblePrefab, startPosition+new Vector2(y*xGap + x%2*xGap/2f,-x*yGap), Quaternion.identity, parent.transform);
-                }else
-                {
-                    newBubble =   Instantiate(bubblePrefab, startPosition+new Vector2(y*xGap + x%2*xGap/2f,-x*yGap), Quaternion.identity, parent.transform);
-                }
-
-                if (newBubble.GetComponent<Bubble>().isGhost)
-                {
-                    newBubble.GetComponent<Bubble>().indexer = -1;
-                }
-                else
-                {
+                newBubble =   Instantiate(bubblePrefab, startPosition+new Vector2(y*xGap + x%2*xGap/2f,-x*yGap), Quaternion.identity, parent.transform);
+                
                     int indexer = (int) Math.Pow(2, Random.Range(1, 4));
                     newBubble.GetComponent<Bubble>().SetIndexer(indexer);
+                    newBubble.GetComponent<Fly>().isHitted = true;
                     newBubble.GetComponent<SpriteRenderer>().color =
                         colorConfiguration.colorPowers.First(l => l.indexer == indexer ).color;
                     newBubble.GetComponentInChildren<Canvas>().worldCamera = _camera;
-                }
-               
+
             }
             
         }

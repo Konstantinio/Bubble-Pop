@@ -22,11 +22,12 @@ public class ShootingManager : MonoBehaviour
     [SerializeField] private GameObject ghostBubblePrefab;
     private Vector2 firstPoint;
     private Vector2 secondPoint;
-    private Fly shot;
-    private Fly nextShot;
+    public Fly shot;
+    public Fly nextShot;
     private bool isActive = false;
     private bool isShooting = false;
     private GameObject ghostBubbleEffect;
+    private Bubble currentGhostBubble;
     private void Start()
     {
         SetOrigins();
@@ -45,11 +46,12 @@ public class ShootingManager : MonoBehaviour
         shot = Instantiate(prefab, origin, Quaternion.identity).GetComponent<Fly>();
         shot.GetComponent<SpriteRenderer>().color = colorConfiguration.colorPowers.First(x => x.indexer == index1).color;
         shot.GetComponent<Bubble>().SetIndexer(index1);
-        
+
         int index2 = GetRandomIndexer();
         nextShot = Instantiate(prefab, nextBubbleOrigin, Quaternion.identity).GetComponent<Fly>();
         nextShot.GetComponent<SpriteRenderer>().color = colorConfiguration.colorPowers.First(x => x.indexer == index2).color;
         nextShot.GetComponent<Bubble>().SetIndexer(index2);
+
         shot.manager = this;
         nextShot.manager = this;
     }
@@ -75,7 +77,7 @@ public class ShootingManager : MonoBehaviour
                 
                 lineRenderer.SetPosition(0,origin);
                 lineRenderer.SetPosition(1,hit.point);
-                if (hit.collider.CompareTag("Wall"))
+                if (hit.collider.CompareTag("Wall") && hit!=null)
                 {
                     
                     if (hit.point.x >= 0)
@@ -87,7 +89,7 @@ public class ShootingManager : MonoBehaviour
                         hit2 = Physics2D.Raycast(hit.point + Vector2.right*0.01f, Vector2.Reflect(hit.point - origin, Vector2.right), Mathf.Infinity,~(1<<9));
                     }
 
-                    if (hit2.collider.CompareTag("Wall"))
+                    if (hit2.collider.CompareTag("Wall") && hit2!=null)
                     {
                         DeactivateLine();
                     }
@@ -107,8 +109,11 @@ public class ShootingManager : MonoBehaviour
                 {
                    
                     Bubble ghostBubble = hit2.collider.gameObject.GetComponent<Bubble>().nearBubbles.ToList().Where(a=>a!=null).OrderBy(x => Vector2.Distance(hit2.point, x.transform.position)).FirstOrDefault(y => y.isGhost);
+                   
                     if (ghostBubble != null)
                     {
+                        currentGhostBubble = ghostBubble;
+                        shot.GetComponent<Fly>().currentGhostBubble = currentGhostBubble;
                         if (secondPoint == Vector2.zero)
                         {
                             firstPoint = ghostBubble.transform.position;
