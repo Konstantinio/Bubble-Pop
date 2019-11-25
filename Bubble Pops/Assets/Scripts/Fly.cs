@@ -29,6 +29,11 @@ public class Fly : MonoBehaviour
 
     }
 
+    private void Hit()
+    {
+        
+    }
+
     private void FlyCheck()
     {
         if (isFlying)
@@ -48,6 +53,7 @@ public class Fly : MonoBehaviour
                     koef = 0; 
                     enabled = false;
                     manager.Reload();
+                    Hit();
                 }
                 index++;
             } 

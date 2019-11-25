@@ -37,6 +37,7 @@ public class Bubble : MonoBehaviour
     {
         indexer = _indexer;
         numberText.text = _indexer.ToString();
+        
     }
     private void InitializeBubble()
     {

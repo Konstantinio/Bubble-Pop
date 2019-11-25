@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.Linq;
 using UnityEngine;
+using Random = UnityEngine.Random;
 using Vector2 = UnityEngine.Vector2;
 
 public class ShootingManager : MonoBehaviour
@@ -28,14 +29,30 @@ public class ShootingManager : MonoBehaviour
     private GameObject ghostBubbleEffect;
     private void Start()
     {
+        SetOrigins();
+        InitializeShootingSystem();
+    }
+
+    private void SetOrigins()
+    {
         origin = originTransform.position;
         nextBubbleOrigin = nextBubbleOriginTransform.position;
+        
+    }
+    private void InitializeShootingSystem()
+    {
+        int index1 = GetRandomIndexer();
         shot = Instantiate(prefab, origin, Quaternion.identity).GetComponent<Fly>();
+        shot.GetComponent<SpriteRenderer>().color = colorConfiguration.colorPowers.First(x => x.indexer == index1).color;
+        shot.GetComponent<Bubble>().SetIndexer(index1);
+        
+        int index2 = GetRandomIndexer();
         nextShot = Instantiate(prefab, nextBubbleOrigin, Quaternion.identity).GetComponent<Fly>();
+        nextShot.GetComponent<SpriteRenderer>().color = colorConfiguration.colorPowers.First(x => x.indexer == index2).color;
+        nextShot.GetComponent<Bubble>().SetIndexer(index2);
         shot.manager = this;
         nextShot.manager = this;
     }
-
     void Update()
     {
         DrawLine();
@@ -165,13 +182,21 @@ public class ShootingManager : MonoBehaviour
 
     public void Reload()
     {
+        int indexForNewShot = GetRandomIndexer();
         nextShot.transform.position = origin;
         shot = nextShot;
         nextShot = Instantiate(prefab, nextBubbleOrigin, Quaternion.identity).GetComponent<Fly>();
+        nextShot.GetComponent<Bubble>().SetIndexer(indexForNewShot);
+        nextShot.GetComponent<SpriteRenderer>().color =
+            colorConfiguration.colorPowers.First(x => x.indexer == indexForNewShot).color;
         nextShot.manager = this;
         isShooting = false;
     }
-    
+
+    private int GetRandomIndexer()
+    {
+        return (int)Math.Pow(2, Random.Range(1, 4));
+    }
     
 
 }
