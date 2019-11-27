@@ -36,10 +36,10 @@ public class Crush : MonoBehaviour
                 isFlying = false;
                 if (!isHighest)
                 {
-                    Destroy(gameObject);
+                   
                     isHighest = false;
                 }
-               
+                Destroy(gameObject);
             } 
         }
         

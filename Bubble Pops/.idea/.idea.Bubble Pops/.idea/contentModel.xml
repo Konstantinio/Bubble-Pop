@@ -8,6 +8,7 @@
       <e p="Assets" t="Include">
         <e p="Scripts" t="Include">
           <e p="Bubble.cs" t="Include" />
+          <e p="ClusterizationManager.cs" t="Include" />
           <e p="ColorConfiguration.cs" t="Include" />
           <e p="ColorPower.cs" t="Include" />
           <e p="Crush.cs" t="Include" />
